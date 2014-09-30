@@ -1,6 +1,14 @@
 {
+    "name": "iamjessu/fogio",
+    "description": "A very specific FogBugz to Planio importer.",
+    "keywords": ["fogbugz", "planio", "importer", "api"],
     "require": {
         "kbsali/redmine-api": "~1.0",
         "there4/fogbugz-api": "~1.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "Fogio": "app/"
+        }
     }
 }
