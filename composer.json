@@ -1,0 +1,6 @@
+{
+    "require": {
+        "kbsali/redmine-api": "~1.0",
+        "there4/fogbugz-api": "~1.0"
+    }
+}
