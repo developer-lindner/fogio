@@ -6,7 +6,7 @@ use There4\FogBugz;
 class FogbugzApi {
 
     protected $fb;
-    protected $filter       = 2;
+    protected $filter       = 13; //All open cases by Id
     protected $columns      = 'ixBug,sTitle,dtOpened,ixBugParent';
     protected $search_query = 'opened:yesterday';
 
