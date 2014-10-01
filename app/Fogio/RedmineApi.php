@@ -110,7 +110,7 @@ class RedmineApi {
             try
             {
                 $this->rm->api('issue')->create(array(
-                    'project_id'     => '1',
+                    'project_id'     => 'kunde',
                     'subject'        => $_subject,
                     'description'    => $issue['url'],
                     'assigned_to_id' => 46, //JEL
