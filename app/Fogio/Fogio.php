@@ -53,7 +53,7 @@ class Fogio {
 
         if($total)
         {
-            print sprintf("Total cases imported: %s\n", count($total));
+            print sprintf("Total cases imported: %s\n", $total);
         }
         else
         {

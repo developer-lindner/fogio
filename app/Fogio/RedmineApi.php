@@ -8,11 +8,13 @@ class RedmineApi {
     protected $rm;
     protected $filter_string = '#FogBugz';
     protected $search_params = array(
+        'offset'         => '0',
+        'limit'          => '500',
         'sort'           => 'id',
-        'project_id'     => '1',
+        'project_id'     => 'kunde',
         'status_id'      => 'open',
+        'cf_91808407'    => '1',
         //'created_on'     => '>=2014-05-30'
-        //'subject'      => '#FogBugz',
         //'cf_2'           => '1', // where 1 = id of the customer field
         //cf_SOME_CUSTOM_FIELD_ID => 'value'
     );
@@ -111,20 +113,20 @@ class RedmineApi {
                     'project_id'     => '1',
                     'subject'        => $_subject,
                     'description'    => $issue['url'],
-                    'assigned_to_id' => 1,
+                    'assigned_to_id' => 46, //JEL
                     'custom_fields'  => array(
                         array(
-                            'id'    => 1,
-                            'name'  => 'isFogBugz',
-                            'value' => true,
+                            'id'    => 91808407,
+                            'name'  => 'isFogbugz',
+                            'value' => 1,
                         ),
                         array(
-                            'id'    => 2,
-                            'name'  => 'FogBugz_Id',
+                            'id'    => 91808406,
+                            'name'  => 'FogbugzId',
                             'value' => (integer) $issue['id'],
                         ),
                     ),
-                    'watcher_user_ids' => array(1),
+                    'watcher_user_ids' => array(46,3,50), // JEL,PAR,MAS
                 ));
 
                 $total_imported++;
