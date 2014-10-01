@@ -13,7 +13,7 @@ class RedmineApi {
         'sort'           => 'id',
         'project_id'     => 'kunde',
         'status_id'      => 'open',
-        'cf_91808407'    => '1',
+        'cf_91808407'    => 1,
         //'created_on'     => '>=2014-05-30'
         //'cf_2'           => '1', // where 1 = id of the customer field
         //cf_SOME_CUSTOM_FIELD_ID => 'value'
