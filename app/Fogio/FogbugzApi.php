@@ -9,6 +9,7 @@ class FogbugzApi {
     protected $filter       = 13; //All open cases by Id
     protected $columns      = 'ixBug,sTitle,dtOpened,ixBugParent';
     protected $search_query = 'opened:yesterday';
+    protected $host;
 
     function __construct($credentials)
     {
@@ -17,6 +18,8 @@ class FogbugzApi {
             $credentials['password'],
             $credentials['host']
         );
+
+        $this->host = $credentials['host'];
     }
 
     public function login()
@@ -123,7 +126,7 @@ class FogbugzApi {
         {
             $_id    = (integer) $case['ixBug'];
             $_title = (string) $case->sTitle;
-            $_link  = "http://jessuvolt.fogbugz.com/f/cases/".$_id;
+            $_link  = $this->host."/f/cases/".$_id;
 
             $_cases->by_id[$_id]          = array();
             $_cases->by_id[$_id]['id']    = $_id;
