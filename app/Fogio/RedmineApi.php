@@ -129,6 +129,8 @@ class RedmineApi {
                     'watcher_user_ids' => array(46,3,50), // JEL,PAR,MAS
                 ));
 
+                print $_subject ."\n";
+
                 $total_imported++;
             }
             catch (Exception $e)
