@@ -114,6 +114,7 @@ class RedmineApi {
                     'subject'        => $_subject,
                     'description'    => $issue['url'],
                     'assigned_to_id' => 46, //JEL
+                    'parent_issue_id' => 5653,
                     'custom_fields'  => array(
                         array(
                             'id'    => 91808407,
