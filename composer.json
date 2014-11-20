@@ -1,5 +1,5 @@
 {
-    "name": "iamjessu/fogio",
+    "name": "jessu/fogio",
     "description": "A very specific FogBugz to Planio importer.",
     "keywords": ["fogbugz", "planio", "importer", "api"],
     "require": {
