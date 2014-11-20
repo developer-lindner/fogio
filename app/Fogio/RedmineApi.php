@@ -12,7 +12,7 @@ class RedmineApi {
         'limit'          => '500',
         'sort'           => 'id',
         'project_id'     => 'kunde',
-        'status_id'      => 'open',
+        'status_id'      => '*',
         'cf_91808407'    => 1,
         //'created_on'     => '>=2014-05-30'
         //'cf_2'           => '1', // where 1 = id of the customer field
@@ -106,6 +106,7 @@ class RedmineApi {
         foreach($issues as $issue)
         {
             $_subject = $this->filter_string . ' ' . $issue['id'] . ': ' . $issue['title'];
+            $_priority = $issue['priority'] == '1' ? 5 : 4; // 5 high (prio 1). 4 normal (all the rest)
 
             try
             {
@@ -113,7 +114,8 @@ class RedmineApi {
                     'project_id'     => 'kunde',
                     'subject'        => $_subject,
                     'description'    => $issue['url'],
-                    'assigned_to_id' => 46, //JEL
+                    'priority_id'    => $_priority,
+                    //'assigned_to_id' => 46, //JEL
                     'parent_issue_id' => 5653,
                     'custom_fields'  => array(
                         array(
