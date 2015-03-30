@@ -7,17 +7,8 @@ class RedmineApi {
 
     protected $rm;
     protected $filter_string = '#FogBugz';
-    protected $search_params = array(
-        'offset'         => '0',
-        'limit'          => '500',
-        'sort'           => 'id',
-        'project_id'     => 'kunde',
-        'status_id'      => '*',
-        'cf_91808407'    => 1,
-        //'created_on'     => '>=2014-05-30'
-        //'cf_2'           => '1', // where 1 = id of the customer field
-        //cf_SOME_CUSTOM_FIELD_ID => 'value'
-    );
+    protected $search_params;
+    protected $user_map;
 
     function __construct($credentials)
     {
@@ -107,15 +98,17 @@ class RedmineApi {
         {
             $_subject = $this->filter_string . ' ' . $issue['id'] . ': ' . $issue['title'];
             $_priority = $issue['priority'] == '1' ? 5 : 4; // 5 high (prio 1). 4 normal (all the rest)
+            $_user_id = array_key_exists($issue['assigned_to'], $this->user_map) == false ? null : $this->user_map[$issue['assigned_to']];
 
             try
             {
-                $this->rm->api('issue')->create(array(
+                $result = $this->rm->api('issue')->create(array(
                     'project_id'     => 'kunde',
                     'subject'        => $_subject,
                     'description'    => $issue['url'],
                     'priority_id'    => $_priority,
-                    //'assigned_to_id' => 46, //JEL
+                    'assigned_to_id' => $_user_id,
+                    'due_date' => $issue['due_date'],
                     'parent_issue_id' => 5653,
                     'custom_fields'  => array(
                         array(
@@ -132,7 +125,7 @@ class RedmineApi {
                     'watcher_user_ids' => array(46,3,50), // JEL,PAR,MAS
                 ));
 
-                print $_subject ."\n";
+                print $result->id . " --- " . $_subject ."\n";
 
                 $total_imported++;
             }
@@ -149,5 +142,10 @@ class RedmineApi {
         }
 
         return $total_imported;
+    }
+
+    public function setUserMap($map)
+    {
+        $this->user_map = $map;
     }
 }

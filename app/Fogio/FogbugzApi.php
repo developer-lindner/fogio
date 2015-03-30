@@ -7,8 +7,8 @@ class FogbugzApi {
 
     protected $fb;
     protected $filter       = 15; //All open cases by Id
-    protected $columns      = 'ixBug,sTitle,dtOpened,ixBugParent,ixPriority';
-    protected $search_query = 'opened:"yesterday..today"';
+    protected $columns      = 'ixBug,sTitle,dtOpened,ixBugParent,ixPriority,dtDue,ixPersonAssignedTo';
+    protected $search_query;
     protected $host;
 
     function __construct($credentials)
@@ -125,6 +125,8 @@ class FogbugzApi {
         foreach($cases->cases->children() as $case)
         {
             $_id    = (integer) $case['ixBug'];
+            $_due    = date('Y/m/d', strtotime($case->dtDue));
+            $_assigned_to = (integer) $case->ixPersonAssignedTo;
             $_title = (string) $case->sTitle;
             $_priority = (string) $case->ixPriority;
             $_link  = $this->host."/f/cases/".$_id;
@@ -134,12 +136,16 @@ class FogbugzApi {
             $_cases->by_id[$_id]['title'] = $_title;
             $_cases->by_id[$_id]['priority']   = $_priority;
             $_cases->by_id[$_id]['url']   = $_link;
+            $_cases->by_id[$_id]['due_date']   = $_due;
+            $_cases->by_id[$_id]['assigned_to']   = $_assigned_to;
 
             $_cases->by_array[] = array(
                 'id'    => $_id,
                 'title' => $_title,
                 'priority' => $_priority,
-                'url'   => $_link
+                'url'   => $_link,
+                'due_date'   => $_due,
+                'assigned_to'   => $_assigned_to,
             );
 
             $_cases->ids[] = $_id;
