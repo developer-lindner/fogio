@@ -5,12 +5,12 @@ $credentials = array(
     'fogbugz' => array(
         'username' => 'user',
         'password' => 'pass',
-        'host'     => 'url',
+        'host'     => 'https://NAME.fogbugz.com',
     ),
 
     'planio' => array(
         'username' => 'user',
         'password' => 'pass',
-        'host'     => 'url',
+        'host'     => 'https://NAME.plan.io',
     )
 );
