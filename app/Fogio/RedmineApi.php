@@ -125,7 +125,12 @@ class RedmineApi {
                     'watcher_user_ids' => array(46,3,50), // JEL,PAR,MAS
                 ));
 
-                print $result->id . " --- " . $_subject ."\n";
+                if($result->id) {
+                    print $result->id . " --- " . $_subject ."\n";
+                } else {
+                    print "Error while creating issue: " . $_subject  ."\n";
+                    print_r($result);
+                }
 
                 $total_imported++;
             }
