@@ -1,3 +1,4 @@
 .idea/
 vendor/
-app/Fogio/config/credentials.php
+app/Fogio/config/*.php
+!app/Fogio/config/credentials.sample.php
