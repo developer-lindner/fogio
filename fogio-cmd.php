@@ -1,13 +1,13 @@
 <?php
 define("PATH_TO_CREDENTIALS", "./app/Fogio/config/");
 
-if ($argc < 1) {
+if ($argc <= 1) {
     print "\nCredentials needed. Stopping!\n";
-    exit();
+    exit;
 }
 
 $credentials_called = $argv[1];
-$credentials_config_file = $argv[1] . 'php';
+$credentials_config_file = $argv[1] . '.php';
 
 if (!is_file(PATH_TO_CREDENTIALS . $credentials_config_file)) {
     print "\nNo such credentials found. Stopping!\n";
