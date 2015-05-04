@@ -125,7 +125,7 @@ class FogbugzApi {
         foreach($cases->cases->children() as $case)
         {
             $_id    = (integer) $case['ixBug'];
-            $_due = strtotime($case->dtDue) > date('d-m-Y') ? strtotime($case->dtDue) : null;
+            $_due = strtotime($case->dtDue) > strtotime(date('d-m-Y')) ? strtotime($case->dtDue) : null;
             $_due    = $_due ? date('Y/m/d', $_due) : null;
             $_assigned_to = (integer) $case->ixPersonAssignedTo;
             $_title = (string) $case->sTitle;
