@@ -6,6 +6,8 @@ use stdClass;
 class RedmineApi {
 
     protected $rm;
+    protected $rm_project_id;
+    protected $rm_parent_issue_id;
     protected $filter_string = '#FogBugz';
     protected $search_params;
     protected $user_map;
@@ -17,6 +19,9 @@ class RedmineApi {
             $credentials['username'],
             $credentials['password']
         );
+
+        $this->rm_project_id = $credentials['project_id'];
+        $this->rm_parent_issue_id = $credentials['parent_issue_id'];
     }
 
     public function setSearchParams($params)
@@ -89,7 +94,7 @@ class RedmineApi {
 
         return $this->_parseIssues($issues);
     }
-    
+
     public function createIssues($issues)
     {
         $total_imported = 0;
@@ -103,13 +108,13 @@ class RedmineApi {
             try
             {
                 $result = $this->rm->api('issue')->create(array(
-                    'project_id'     => 'kunde',
+                    'project_id'     => $this->rm_project_id,
                     'subject'        => $_subject,
                     'description'    => $issue['url'],
                     'priority_id'    => $_priority,
                     'assigned_to_id' => $_user_id,
                     'due_date' => $issue['due_date'],
-                    'parent_issue_id' => 5653,
+                    'parent_issue_id' => $this->rm_parent_issue_id,
                     'custom_fields'  => array(
                         array(
                             'id'    => 91808407,
