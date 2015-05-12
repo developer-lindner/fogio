@@ -1,7 +1,7 @@
 <?php
 define("PATH_TO_CREDENTIALS", "./app/Fogio/config/");
 
-if ($argc < 1) {
+if ($argc <= 1) {
     print "\nCredentials needed. Stopping!\n";
     exit();
 }
